@@ -1,0 +1,33 @@
+include $(MKFILE_TMPLATE_DIR)/MAKE_BASE_ENV.mk 
+
+####modify project information
+PRJ_NAME =tangram
+TARGET =libtangramcom.so
+
+CPPFLAGS += -D -include ../include/wine/compileconfig.h 
+CPPFLAGS += -I../include/ -I../include/tangram
+CPPFLAGS += -I../utils/CommonUtilitiesLib 
+
+#LDFLAGS
+ifeq ($(TARGET_OS),android)
+else
+LIBS+= -lpthread
+endif
+LIBS+= -dl -lstdc++
+
+SRCFILES = 	$(shell ls ole32/*.c)
+SRCFILES += 	$(shell ls rpcrt4/*.c)
+SRCFILES += 	$(shell ls rpcrt4/*.cpp)
+SRCFILES += 	$(shell ls tgmwine/*.c)
+SRCFILES += 	$(shell ls tgmwine/kernel32/*.c)
+#SRCFILES += 	$(shell ls tgmwine/kernel32/*.cpp)
+#SRCFILES += 	$(shell ls tgmwine/ntdll/*.c)
+SRCFILES += 	$(shell ls tgmwine/user32/*.c)
+SRCFILES += 	$(shell ls tgmwine/reg/reg.cpp)
+SRCFILES +=  	$(shell ls tgmlog/Sources/*.c)
+SRCFILES +=     $(shell ls uuid/*.c)
+
+
+			
+include $(MKFILE_TMPLATE_DIR)/MAKE_BASE_SHARED_LIBRARY.mk
+
