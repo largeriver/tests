@@ -5,6 +5,13 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tests_C11", "..\tests\test_c11\test_c11.vcxproj", "{F20F500F-69A1-4EFC-B031-AB44C6A41A19}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{05980188-DDB0-4B7B-8974-6680C02B042B}"
+	ProjectSection(SolutionItems) = preProject
+		..\.gitignore = ..\.gitignore
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tests_snippets", "..\tests\test_snippets\tsts_snippets.vcxproj", "{FB7CFDED-2F0D-48AE-B7FF-48EEDD0C7402}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -15,6 +22,10 @@ Global
 		{F20F500F-69A1-4EFC-B031-AB44C6A41A19}.Debug|Win32.Build.0 = Debug|Win32
 		{F20F500F-69A1-4EFC-B031-AB44C6A41A19}.Release|Win32.ActiveCfg = Release|Win32
 		{F20F500F-69A1-4EFC-B031-AB44C6A41A19}.Release|Win32.Build.0 = Release|Win32
+		{FB7CFDED-2F0D-48AE-B7FF-48EEDD0C7402}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FB7CFDED-2F0D-48AE-B7FF-48EEDD0C7402}.Debug|Win32.Build.0 = Debug|Win32
+		{FB7CFDED-2F0D-48AE-B7FF-48EEDD0C7402}.Release|Win32.ActiveCfg = Release|Win32
+		{FB7CFDED-2F0D-48AE-B7FF-48EEDD0C7402}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
