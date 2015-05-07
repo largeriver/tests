@@ -3,6 +3,9 @@
 *.lo
 *.o
 *.obj
+*.ncb
+*.suo
+
 
 # Precompiled Headers
 *.gch
@@ -26,3 +29,6 @@
 *.exe
 *.out
 *.app
+
+build
+Debug

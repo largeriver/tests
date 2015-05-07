@@ -1,0 +1,3 @@
+./out/host/linux-x86/obj/STATIC_LIBRARIES/libcutils_intermediates/libcutils.a
+./out/host/linux-x86/obj/STATIC_LIBRARIES/libunz_intermediates/libunz.a
+./out/host/linux-x86/obj/STATIC_LIBRARIES/libzipfile_intermediates/libzipfile.a

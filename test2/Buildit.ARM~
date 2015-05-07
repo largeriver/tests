@@ -1,0 +1,75 @@
+#!/bin/sh
+ 
+
+OSNAME=`uname`
+HARDWARENAME=`uname -m`
+PLAT=$OSNAME.$HARDWARENAME
+
+CURRENT_DIR=`pwd`
+OBJECTS_ROOT=`pwd`/build/arm/objs/
+DESTDIR_ROOT=`pwd`/build/arm/
+
+
+echo "PLAT= $PLAT"
+echo "OBJECTS_ROOT=$OBJECTS_ROOT"
+echo "DESTDIR_ROOT=$DESTDIR_ROOT"
+
+SHOW_HELP=0
+if [ "$1" = "-v" ] ; then
+   SHOW_HELP=1
+fi
+
+if [ "$1" = "-h" ] ; then
+   SHOW_HELP=1
+fi
+
+if [ "$1" = "?" ] ; then
+   SHOW_HELP=1
+fi
+
+if [ "$1" = "help" ] ; then
+   SHOW_HELP=1
+fi
+
+if [ $SHOW_HELP = 1 ] ; then
+	echo "no help"
+	exit 0
+fi
+
+CPLUS=arm-linux-gcc
+CCOMP=arm-linux-gcc
+LINKER='arm-linux-gcc'
+LIBLINKER='arm-linux-ld'
+MAKE=make
+
+COMPILER_FLAGS="-D_REENTRANT -D__USE_POSIX -D__linux__=1 -pipe"
+INCLUDE_FLAG="-include"
+CORE_LINK_LIBS="-lpthread -ldl -lstdc++ -lm -lcrypt"
+
+SHARED=-shared
+MODULE_LIBS=
+		
+	
+
+echo Building for $PLAT with $CPLUS
+
+export CPLUS
+export CCOMP
+export LINKER
+export LIBLINKER
+export COMPILER_FLAGS
+export INCLUDE_FLAG
+export CORE_LINK_LIBS
+export SHARED
+export MODULE_LIBS
+export OBJECTS_ROOT
+export DESTDIR_ROOT
+
+
+echo Building mcp for $PLAT with $CPLUS
+#cd utlis/CommonUtilitiesLib/
+$MAKE -f Makefile.POSIX $*
+#cd $CURRENT_DIR
+
+
+

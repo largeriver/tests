@@ -1,0 +1,65 @@
+C++ = $(CPLUS)
+CC = $(CCOMP)
+LINK = $(LINKER)
+CCFLAGS += $(COMPILER_FLAGS)  -g -Wall
+
+NAME =thread 
+TARGET=thread
+#OBJECTS_DIR=$(OBJECTS_ROOT)$(NAME)/
+#DESTDIR=$(DESTDIR_ROOT)lib/
+OBJECTS_DIR=$(OBJECTS_ROOT)
+DESTDIR=$(DESTDIR_ROOT)
+DEL_FILE = rm -f
+MKDIR = mkdir -p
+
+
+# OPTIMIZATION
+CCFLAGS += -O2
+
+#C++FLAGS
+C++FLAGS = $(CCFLAGS)
+
+# EACH DIRECTORY WITH HEADERS MUST BE APPENDED IN THIS MANNER TO THE CCFLAGS
+CCFLAGS += -I.
+CCFLAGS += -I..
+
+#LIBS example LIBS +=-L/usr/local/lib -lpthread
+LIBS = 
+
+SRCFILES= 	thread.c
+			
+			
+CFILES 	= 	$(filter %.c,$(SRCFILES))
+
+CPPFILES =	$(filter %.cpp,$(SRCFILES))
+
+
+first: all
+
+$(OBJECTS_DIR) :
+	$(MKDIR) $(OBJECTS_DIR)
+
+$(DESTDIR) :
+	$(MKDIR) $(DESTDIR)
+
+all: $(OBJECTS_DIR) $(DESTDIR) $(DESTDIR)$(TARGET)
+
+COBJS	=$(patsubst %.c,$(OBJECTS_DIR)%.o,$(CFILES))
+CPPOBJS	=$(patsubst %.cpp,$(OBJECTS_DIR)%.o,$(CPPFILES))
+
+$(DESTDIR)$(TARGET): $(COBJS) $(CPPOBJS)
+	$(LINK) $(LINKER_FLAGS)  -o $(DESTDIR)$(TARGET) $(COBJS) $(CPPOBJS) $(CORE_LINK_LIBS)
+
+install: 
+
+clean:
+	rm -f $(DESTDIR)$(TARGET) $(COBJS) $(CPPOBJS)
+
+.SUFFIXES: .cpp .c .o
+
+$(OBJECTS_DIR)%.o:%.cpp
+	$(C++) -c -o $@ $(DEFINES) $(C++FLAGS) $<
+
+$(OBJECTS_DIR)%.o:%.c
+	$(CC) -c -o $@ $(DEFINES) $(CCFLAGS) $<
+

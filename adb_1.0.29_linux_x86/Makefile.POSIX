@@ -1,0 +1,26 @@
+####modify project information
+PRJ_NAME =adb_1.0.29
+TARGET =adb_1.0.29
+
+CPPFLAGS += 
+CPPFLAGS += -I. -I.. -I../../../include -I../../../include/tangram -I../../../utils/CommonUtilitiesLib
+CPPFLAGS += -I./include
+CFLAGS += -O2 -g -DADB_HOST=1 -DHAVE_FORKEXEC -Wall -Wno-unused-parameter
+CFLAGS += -D_XOPEN_SOURCE -D_GNU_SOURCE
+#CFLAGS		+= -fvisibility=hidden
+CXXFLAGS	+= -fno-exceptions
+CXXFLAGS	+= $(CFLAGS)
+
+
+#LDFLAGS += -L$(INSTALL_ROOT)/lib 
+#LDFLAGS += -Wl,-rpath-link=$(INSTALL_ROOT)/lib
+LIBS += -ldl
+#LIBS += -lCommonUtilities -ltangramcom 
+LIBS += -lrt -lncurses -lpthread
+LIBS += libcutils.a libzipfile.a libunz.a
+SRCFILES = 	$(shell ls *.c)
+
+
+	
+include $(MKFILE_TMPLATE_DIR)/MAKE_BASE_EXECUTABLE.mk
+
