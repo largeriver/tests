@@ -83,7 +83,7 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="test_matchname.cpp" />
-    <ClCompile Include="test_misc.cpp" />
+    <ClCompile Include="test_dummy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="readme.txt" />

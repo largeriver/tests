@@ -32,3 +32,8 @@ TEST_F(LiteralTest, dummy) {
 
 }
 
+////////////////////////////////////////////////
+TEST(DummyTest, dummy) {
+    EXPECT_TRUE(true);
+    EXPECT_EQ(sizeof(int), 4);
+}

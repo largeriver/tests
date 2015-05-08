@@ -19,16 +19,19 @@ void scan(const char* pszText, const char* pszName);
 
 #include <stdio.h>
 
-bool _isalpha(char c){
+static bool _isalpha(char c){
     return  (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
 }
 
-bool _isalphanum(char c){
+static bool _isalphanum(char c){
     return  _isalpha(c) || (c >= '0' && c <= '9');
 }
 
+static bool _isspace(char c){
+    return c == 0x20 || c == '\t';
+}
 
-bool _match(const char* s, const char* m, const char** _end = NULL){
+static bool _match(const char* s, const char* m, const char** _end = NULL){
 
     while (*s && *m){
         switch (*m)
@@ -37,37 +40,38 @@ bool _match(const char* s, const char* m, const char** _end = NULL){
             //如果*是最后一个，那么匹配
             m++;
 
-            if (*m == ' '){
+            //下一个模式字符是空白
+            if (_isspace(*m)){
                 //匹配完当前单词
                 while (_isalpha(*s)){ s++; }
                 continue;
             }
 
+            //*已经是模式字符串的最后一个字符了，over
             if (*m == 0){
                 while (!_isalpha(*s)){ s++; }
                 if (_end) *_end = s;
                 return true;
             }
 
-            /*J*m*l*/
+            /*加持递归模式，注意只需要匹配当前word*/
             for (s; *s && _isalpha(*s); s++){
                 if (_match(s, m, _end))
                     return true;
             }
             return false;
-
             break;
         case '?':
             if (!_isalpha(*s))
                 return false;
             break;
         case ' ':
-            if (*m != *s)
+        case '\t'://匹配空白
+            if (!_isspace(*s))
                 return false;
-            //跳过连续空格
-            while (*(m + 1) == ' ') { m++; }
-            while (*(s + 1) == ' ') { s++; }
-
+            //跳过连续空白
+            while (_isspace(*(m + 1))) { m++; }
+            while (_isspace(*(s + 1))) { s++; }
             break;
         default://alpha and space
 
@@ -119,19 +123,19 @@ int _scan(const char* pszText, const char* pszName){
     return i;
 }
 
-class MatchNameTest : public ::testing::Test {
-protected:
-    virtual void SetUp() {
+//class MatchNameTest : public ::testing::Test {
+//protected:
+//    virtual void SetUp() {
+//
+//    }
+//
+//    virtual void TearDown() {}
+//
+//public:
+//};
 
-    }
 
-    virtual void TearDown() {}
-
-public:
-};
-
-
-TEST_F(MatchNameTest, dummy) {
+TEST(MatchNameTest, dummy) {
     //    EXPECT_TRUE(match_token("John", 4, "J*", 2));
     //EXPECT_TRUE(match_token("Smith",5, "Smi??",5));
     EXPECT_TRUE(_match("John", "J*"));
